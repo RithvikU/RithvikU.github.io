@@ -14,21 +14,14 @@ h1, h2, h3, h4, h5 {
     font-weight: 700;
 }
 
-html {font-size: 100%;} /* 16px */
+html {font-size: 100%;}
+h1 {font-size: 4.210rem;}
+h2 {font-size: 3.158rem;}
+h3 {font-size: 2.369rem;}
+h4 {font-size: 1.777rem;}
+h5 {font-size: 1.333rem;}
+small {font-size: 0.750rem;}
 
-h1 {font-size: 4.210rem; /* 67.36px */}
-
-h2 {font-size: 3.158rem; /* 50.56px */}
-
-h3 {font-size: 2.369rem; /* 37.92px */}
-
-h4 {font-size: 1.777rem; /* 28.48px */}
-
-h5 {font-size: 1.333rem; /* 21.28px */}
-
-small {font-size: 0.750rem; /* 12px */}
-
-/* COLOR THEME */
 :root {
     --text: #eaecf0;
     --background: #0e1116;
@@ -37,7 +30,6 @@ small {font-size: 0.750rem; /* 12px */}
     --accent: #5f7fc8;
 }
 
-/* FULL WIDTH */
 #wrapper {
     width: 100%;
     margin: 0;
@@ -54,12 +46,22 @@ h2 {
     text-align: center;
 }
 
+/* --- Page Titles --- */
+main h2::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 3px;
+    background-color: var(--accent);
+    margin: 8px auto 0;
+    border-radius: 2px;
+}
+
 h3 {
     margin-top: 0;
     text-align: center;
 }
 
-/* HEADER / NAV */
 #topbar {
     display: flex;
     align-items: center;
@@ -69,11 +71,9 @@ h3 {
     border-bottom: 2px solid var(--accent);
     position: sticky;
     top: 0;
-    z-index: 999;   
+    z-index: 999;
 }
 
-
-/* NAME / TITLE */
 #topbar h1 {
     margin: 0 10px;
     flex-grow: 1;
@@ -85,26 +85,17 @@ h3 {
     color: var(--text);
 }
 
-#topbar h1 a:hover {
-    color: var(--accent);
-}
-
-/* NAVIGATION */
 #topbar nav ul {
     display: flex;
     gap: 28px;
     list-style: none;
     margin: 0;
-    padding: 0;
 }
-
 
 #topbar nav ul li a {
     color: var(--text);
     text-decoration: none;
     font-weight: 700;
-    position: relative;
-    overflow: hidden;
     transition: 0.3s;
 }
 
@@ -113,23 +104,6 @@ h3 {
     transform: scale(1.2);
 }
 
-
-#topbar nav ul li a::after {
-    display: none;
-}
-
-
-main > h2.fade-in::after {
-    content: "";
-    display: block;
-    width: 80px;
-    height: 3px;
-    background-color: var(--accent);
-    margin: 8px auto 0;
-    border-radius: 2px;
-}
-
-/* MAIN PROFILE IMAGE */
 #headshot-container {
     text-align: center;
     margin: 20px 0;
@@ -149,7 +123,6 @@ main > h2.fade-in::after {
     box-shadow: 0px 0px 28px rgba(95, 127, 200, 0.65);
 }
 
-/* CONTENT BOXES */
 .info-box {
     background-color: var(--secondary);
     border: 2px solid var(--accent);
@@ -172,13 +145,56 @@ main > h2.fade-in::after {
     margin: 18px auto;
 }
 
-/* Projects grid and cards */
+.projects-overview p a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.projects-overview p a:hover {
+    color: var(--accent);
+}
+
 .projects-overview .projects-grid {
     display: flex;
     gap: 20px;
     justify-content: center;
     align-items: stretch;
 }
+
+.pdf-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border: 2px solid var(--accent);
+    background: transparent;
+    color: var(--text);
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: background-color 0.18s ease, transform 0.12s ease, color 0.18s ease;
+}
+
+.pdf-download svg {
+    display: block;
+    color: var(--accent);
+}
+
+.pdf-download span { color: var(--text); }
+
+.pdf-download:hover,
+.pdf-download:focus {
+    background-color: var(--accent);
+    color: var(--background);
+    transform: translateY(-2px);
+}
+
+.pdf-download:hover svg,
+.pdf-download:focus svg {
+    color: var(--background);
+}
+
+.resume-download { margin: 12px 0 22px; }
 
 .project-card {
     width: calc(50% - 10px);
@@ -190,7 +206,10 @@ main > h2.fade-in::after {
     cursor: pointer;
     transition: transform 0.35s ease;
     transform-origin: center;
-    display: flex;
+        display: flex;
+        width: 100%;
+        max-width: 1100px; /* constrain card width and keep it centered */
+        margin: 0 auto;
     flex-direction: column;
 }
 
@@ -199,12 +218,10 @@ main > h2.fade-in::after {
     height: 180px;
     object-fit: cover;
     transition: transform 0.35s ease;
-    /* curved top corners for the image to match the card */
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
 }
 
-/* Hover/Focus: scale the whole card slightly (zoom-out visual) */
 .project-card:hover,
 .project-card:focus {
     transform: scale(0.98);
@@ -216,16 +233,6 @@ main > h2.fade-in::after {
     color: var(--text);
 }
 
-@media (max-width: 700px) {
-    .projects-overview .projects-grid {
-        flex-direction: column;
-    }
-    .project-card {
-        width: 100%;
-    }
-}
-
-/* TWO COLUMN */
 .two-column {
     display: flex;
     gap: 20px;
@@ -235,11 +242,6 @@ main > h2.fade-in::after {
     flex: 1;
 }
 
-.two-column .info-box h3 {
-    margin-bottom: 8px;
-}
-
-/* FOOTER */
 footer {
     background-color: var(--secondary);
     padding: 1em;
@@ -252,11 +254,11 @@ footer a {
     color: var(--primary);
     text-decoration: none;
 }
+
 footer a:hover {
     color: var(--accent);
 }
 
-/* FADE-IN ANIMATION */
 .fade-in {
     opacity: 0;
     transform: translateY(15px);
@@ -269,3 +271,180 @@ footer a:hover {
         transform: translateY(0);
     }
 }
+
+
+
+/* --- Projects Page --- */
+.projects-page .projects-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    margin-top: 40px;
+    /* fill the main content width so cards align with other page content */
+    width: 100%;
+    max-width: none;
+    /* slightly less left padding and more right padding to shift cards visually */
+    padding-left: 12px;
+    padding-right: 48px;
+    box-sizing: border-box;
+    align-items: stretch;
+}
+.projects-page .projects-grid {
+    padding-bottom: 60px;
+}
+
+.projects-page .project-card {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* keep items aligned to left so spacing is even inside centered container */
+    text-align: left; /* ensure card content (titles, paragraphs, lists) is left-aligned */
+    gap: 50px;
+    padding: 40px;
+    border: 2px solid var(--accent);
+    border-radius: 10px;
+    background-color: var(--secondary);
+    max-width: 1100px; /* limit visual width */
+    margin-left: 0; /* align cards to left within the grid */
+    margin-right: auto;
+}
+
+.projects-page .project-card:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.projects-page .project-card:first-child {
+    flex-direction: row;
+}
+
+.projects-page .project-card img {
+    width: 45%;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid var(--accent);
+}
+
+.projects-page .project-text {
+    width: 50%;
+    font-size: 1.15rem;
+    line-height: 1.5;
+    color: var(--text);
+    text-align: left;
+    padding-right: 8px;
+}
+
+.projects-page .project-text h3 {
+    margin-bottom: 10px;
+    font-size: 2rem;
+    color: var(--primary);
+    text-align: left;
+}
+
+.projects-page .project-text p {
+    margin-bottom: 12px;
+}
+
+.projects-page .project-text ul {
+    margin-top: 12px;
+    padding-left: 1.25rem; /* slightly larger left padding to align markers visually */
+    list-style: disc;
+    list-style-position: outside;
+}
+.projects-page .project-text li {
+    margin-bottom: 8px;
+    line-height: 1.45;
+    color: var(--text);
+}
+.projects-page .project-text li::marker {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+
+/* -------- RESUME PAGE -------- */
+
+.resume-page h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.resume-box {
+    background-color: var(--secondary);
+    border: 2px solid var(--accent);
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 6px;
+    color: var(--text);
+}
+
+.resume-row {
+    display: flex;
+    gap: 20px;
+}
+
+.resume-box.half {
+    width: 50%;
+}
+
+.resume-box ul {
+    padding-left: 20px;
+}
+
+/* Experience formatting for resume page */
+.experience-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+}
+.experience-item .job-main {
+    flex: 1 1 auto;
+}
+.experience-item .job-main .job-title {
+    font-size: 1.05rem;
+    margin-bottom: 6px;
+    color: var(--text);
+}
+.experience-item .job-main .job-org {
+    color: var(--primary);
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+}
+.experience-item .job-main ul {
+    margin: 0;
+    padding-left: 20px;
+}
+.experience-item .job-meta {
+    width: 140px;
+    text-align: right;
+    color: var(--primary);
+    font-weight: 700;
+    flex: 0 0 140px;
+}
+.experience-item .job-meta .job-dates {
+    font-size: 0.95rem;
+}
+
+@media (max-width: 700px) {
+    .experience-item {
+        flex-direction: column;
+        gap: 12px;
+    }
+    .experience-item .job-meta {
+        width: auto;
+        text-align: left;
+        flex: none;
+    }
+}
+
+@media (max-width: 700px) {
+    .resume-row {
+        flex-direction: column;
+    }
+    .resume-box.half {
+        width: 100%;
+    }
+}
+
