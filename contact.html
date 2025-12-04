@@ -24,67 +24,74 @@
     </header>
 
     <main class="contact-main">
-    <form id="contact-form" class="contact-form" method="post" action="#" novalidate>
-        <h2>Contact</h2>
+        <form id="contact-form" class="contact-form" method="post" action="#" novalidate>
+            <h2>Contact</h2>
 
-        <div class="form-row">
-            <label for="firstName" class="form-label">
-                First Name
-                <input id="firstName" name="firstName" class="form-control" type="text" required aria-required="true" placeholder="First name" />
+            <div class="form-row">
+                <label for="firstName" class="form-label">
+                    First Name
+                    <input id="firstName" name="firstName" class="form-control" type="text" required aria-required="true" placeholder="First name" />
+                </label>
+
+                <label for="lastName" class="form-label">
+                    Last Name
+                    <input id="lastName" name="lastName" class="form-control" type="text" required aria-required="true" placeholder="Last name" />
+                </label>
+            </div>
+
+            <div class="form-row">
+                <label for="email" class="form-label">
+                    Email
+                    <input id="email" name="email" class="form-control" type="email" required aria-required="true" placeholder="you@domain.com" />
+                </label>
+
+                <label for="phone" class="form-label">
+                    Phone Number
+                    <input id="phone" name="phone" class="form-control" type="tel" required aria-required="true" placeholder="(555) 555-5555" 
+                           pattern="^[0-9()+\\-\\s]{7,}$" title="Enter a valid phone number" />
+                </label>
+            </div>
+
+            <label for="message" class="form-label">
+                Comments
+                <textarea id="message" name="message" class="form-control form-textarea" required aria-required="true"
+                          placeholder="If you have any comments please leave them here."
+                          rows="6" minlength="10"></textarea>
             </label>
 
-            <label for="lastName" class="form-label">
-                Last Name
-                <input id="lastName" name="lastName" class="form-control" type="text" required aria-required="true" placeholder="Last name" />
-            </label>
-        </div>
+            <div class="form-actions">
+                <button type="submit" class="form-btn">Send Message</button>
+            </div>
 
-        <div class="form-row">
-            <label for="email" class="form-label">
-                Email
-                <input id="email" name="email" class="form-control" type="email" required aria-required="true" placeholder="you@domain.com" />
-            </label>
+            <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
 
-            <label for="phone" class="form-label">
-                Phone Number
-                <input id="phone" name="phone" class="form-control" type="tel" required aria-required="true" placeholder="(555) 555-5555" pattern="^[0-9()+\-\s]{7,}$" title="Enter a valid phone number" />
-            </label>
-        </div>
+        </form>
+    </main>
 
-        <label for="message" class="form-label">
-            Comments
-            <textarea id="message" name="message" class="form-control form-textarea" required aria-required="true" placeholder="If you have any comments please leave them here." rows="6" minlength="10"></textarea>
-        </label>
+    <script>
+        (function() {
+            const form = document.getElementById('contact-form');
+            const status = document.getElementById('form-status');
 
-        <div class="form-actions">
-            <button type="submit" class="form-btn">Send Message</button>
-        </div>
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
 
-        <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
 
-    </form>
-</main>
-
-<script>
-    (function(){
-        const form = document.getElementById('contact-form');
-        const status = document.getElementById('form-status');
-
-        form.addEventListener('submit', function(e){
-            e.preventDefault();
-            if(!form.checkValidity()){
-                form.reportValidity();
-                return;
-            }
-            status.style.display = 'block';
-            status.textContent = 'Thanks — your message has been recorded. I will follow up via email.';
+                status.style.display = 'block';
+                status.textContent = 'Thanks — your message has been recorded. I will follow up via email.';
                 status.style.color = 'var(--primary)';
+
                 form.reset();
+
                 const first = document.getElementById('firstName');
-                if(first) first.focus();
-        });
-    })();
-</script>
+                if (first) first.focus();
+            });
+        })();
+    </script>
 
     <footer>
         Copyright &copy; 2025 Rithvik Uppala |
