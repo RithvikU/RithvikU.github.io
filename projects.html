@@ -28,8 +28,11 @@
 
         <div class="projects-grid">
 
-            <div class="project-card fade-in">
-                <img src="Wind Turbines.jpg" alt="Wind Forecast Model">
+            <div id="wind-capacity" class="project-card fade-in">
+                <video class="project-video" controls preload="none" poster="Wind Turbines.jpg">
+                    <source src="Wind Turbine Graphs Recordings.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
                 <div class="project-text">
                     <h3><u>U.S. Wind Capacity Forecast Model</u></h3>
                     <p>A predictive analytics model built using U.S. turbine datasets to forecast future renewable energy capacity and infrastructure requirements.</p>
@@ -37,12 +40,13 @@
                         <li>Python, SQL, Pandas, NumPy, Machine Learning</li>
                         <li>Time-series forecasting with policy + cost scenario analysis</li>
                         <li>Exports visuals for real planning and sustainability studies</li>
+                        <li><em>P.S. - Still working on data for 2025-2050</em></li>
                     </ul>
                     <p><strong>Impact:</strong> Helps policymakers and researchers plan future renewable energy expansion using accurate data-driven insights.</p>
                 </div>
             </div>
 
-            <div class="project-card fade-in">
+            <div id="shelter-monitor" class="project-card fade-in">
                 <img src="EPICS.jpg" alt="Shelter System">
                 <div class="project-text">
                     <h3><u>Real-Time Shelter Resource Monitor</u></h3>
@@ -60,8 +64,41 @@
 
     </main>
 
+    <div class="projects-table-wrap">
+        <main class="projects-table-container">
+            <h3>Project Summary</h3>
+            <table class="projects-table" aria-label="Projects summary table">
+                <thead>
+                    <tr>
+                        <th>Project</th>
+                        <th>Languages</th>
+                        <th>Libraries / Frameworks</th>
+                        <th>Skills / Tools</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>U.S. Wind Capacity Forecast Model</td>
+                        <td>Python, SQL</td>
+                        <td>Pandas, NumPy, scikit-learn (time-series)</td>
+                        <td>Time-series forecasting, data cleaning, visualization</td>
+                        <td>Scenario analysis for policy & cost planning</td>
+                    </tr>
+                    <tr>
+                        <td>Real-Time Shelter Resource Monitor</td>
+                        <td>Python, SQL</td>
+                        <td>PyQt5 / Tkinter, PostgreSQL</td>
+                        <td>Real-time sync, database design, UI for staff</td>
+                        <td>Operational tool for emergency shelter resource allocation</td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+    </div>
+
     <footer>
-        © 2025 Rithvik Uppala |
+        Copyright &copy; 2025 Rithvik Uppala |
         <a href="https://github.com/RithvikU" target="_blank">GitHub</a> |
         <a href="https://www.linkedin.com/in/rithvikuppala/" target="_blank">LinkedIn</a>
     </footer>

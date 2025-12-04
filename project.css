@@ -1,33 +1,44 @@
-@import url('https://fonts.googleapis.com/css?family=Diphylleia:700|Diphylleia:400');
+@import url('https://fonts.googleapis.com/css?family=Inter:400;700|IBM+Plex+Mono:400;700|Space+Grotesk:600;700|Outfit:700;800');
 
 body {
-    font-family: 'Diphylleia';
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-weight: 400;
     margin: 0;
     background-color: var(--background);
     color: var(--text);
     line-height: 1.6;
+    letter-spacing: 0.3px;
 }
 
-h1, h2, h3, h4, h5 {
-    font-family: 'Diphylleia';
+h1 {
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.8px;
+}
+
+h2, h3, h4, h5 {
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-weight: 700;
+    letter-spacing: -0.5px;
 }
 
 html {font-size: 100%;}
-h1 {font-size: 4.210rem;}
-h2 {font-size: 3.158rem;}
-h3 {font-size: 2.369rem;}
-h4 {font-size: 1.777rem;}
-h5 {font-size: 1.333rem;}
+h1 {font-size: clamp(2.25rem, 1.5rem + 4vw, 4.210rem);}
+h2 {font-size: clamp(1.75rem, 1.2rem + 3vw, 3.158rem);}
+h3 {font-size: clamp(1.3rem, 1rem + 2vw, 2.369rem);}
+h4 {font-size: clamp(1.05rem, 0.9rem + 1.2vw, 1.777rem);}
+h5 {font-size: clamp(0.9rem, 0.8rem + 0.8vw, 1.333rem);}
 small {font-size: 0.750rem;}
 
 :root {
-    --text: #eaecf0;
-    --background: #0e1116;
-    --primary: #9daccd;
-    --secondary: #364b7d;
-    --accent: #5f7fc8;
+    /* approximate topbar height for centering forms */
+    --topbar-height: 72px;
+    --text: #e6edf3;
+    --background: #0a0e27;
+    --primary: #00d9ff;
+    --secondary: #1a1f3a;
+    --accent: #6366f1;
+    --accent-secondary: #a78bfa;
 }
 
 #wrapper {
@@ -38,23 +49,25 @@ small {font-size: 0.750rem;}
 }
 
 main {
-    width: 85%;
-    margin: auto;
+    width: min(95%, 1100px);
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 h2 {
     text-align: center;
 }
 
-/* --- Page Titles --- */
 main h2::after {
     content: "";
     display: block;
     width: 80px;
-    height: 3px;
+    height: 2px;
     background-color: var(--accent);
     margin: 8px auto 0;
-    border-radius: 2px;
+    border-radius: 1px;
 }
 
 h3 {
@@ -83,6 +96,13 @@ h3 {
 #topbar h1 a {
     text-decoration: none;
     color: var(--text);
+    background: linear-gradient(90deg, var(--primary), var(--accent-secondary), var(--primary));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShimmer 4s linear infinite;
+    transition: transform 0.3s ease;
 }
 
 #topbar nav ul {
@@ -114,13 +134,15 @@ h3 {
     height: 200px;
     border-radius: 50%;
     object-fit: cover;
-    border: none;
+    border: 2px solid var(--primary);
     transition: transform 0.35s ease, box-shadow 0.35s ease;
+    animation: glowPulse 3s infinite;
 }
 
 #profile-pic:hover {
     transform: scale(1.2);
     box-shadow: 0px 0px 28px rgba(95, 127, 200, 0.65);
+    animation: none;
 }
 
 .info-box {
@@ -199,38 +221,66 @@ h3 {
 .project-card {
     width: calc(50% - 10px);
     background-color: var(--secondary);
-    border: 2px solid var(--accent);
-    border-radius: 6px;
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 8px;
     overflow: hidden;
-    text-align: center;
+    text-align: left;
     cursor: pointer;
-    transition: transform 0.35s ease;
+    transition: transform 0.32s cubic-bezier(.2,.9,.2,1), box-shadow 0.32s ease;
     transform-origin: center;
-        display: flex;
-        width: 100%;
-        max-width: 1100px; /* constrain card width and keep it centered */
-        margin: 0 auto;
+    display: flex;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
     flex-direction: column;
+    box-shadow: 0 6px 20px rgba(43,31,25,0.03);
 }
 
 .project-card img {
     width: 100%;
     height: 180px;
     object-fit: cover;
-    transition: transform 0.35s ease;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
+    transition: transform 0.45s ease;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 
 .project-card:hover,
-.project-card:focus {
-    transform: scale(0.98);
+.project-card:focus,
+.project-card:focus-within {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 18px 40px rgba(43,31,25,0.12);
+    border-color: rgba(0,0,0,0.08);
+}
+
+.project-card:hover img,
+.project-card:focus img {
+    transform: scale(1.04);
 }
 
 .project-card h4 {
-    margin: 12px 0 16px;
-    padding: 0 12px;
+    margin: 12px 0 8px;
+    padding: 0 16px;
     color: var(--text);
+}
+
+/* Project inline video styling (uses poster) */
+.project-video {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid var(--accent);
+    aspect-ratio: 16 / 9;
+    max-height: 420px;
+}
+
+@media (min-width: 900px) {
+    .projects-page .project-card .project-video {
+        width: 50%;
+        flex: 0 0 50%;
+    }
 }
 
 .two-column {
@@ -259,10 +309,91 @@ footer a:hover {
     color: var(--accent);
 }
 
+.contact-main {
+    /* center the form while accounting for the sticky header */
+    min-height: calc(100vh - var(--topbar-height));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 40px 40px;
+    box-sizing: border-box;
+}
+.contact-form {
+    width: min(700px, 96%);
+    background: var(--secondary);
+    padding: 28px;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(11,10,9,0.06);
+    /* match purpleish border used on other info cards */
+    border: 2px solid var(--accent);
+    box-sizing: border-box;
+}
+.contact-form h2 {
+    margin: 0 0 12px 0;
+    text-align: center;
+    color: var(--text);
+}
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 14px;
+    align-items: start;
+}
+.form-label {
+    display: block;
+    font-weight: 700;
+    color: var(--text);
+    font-size: 0.95rem;
+}
+.form-control {
+    width: 100%;
+    margin-top: 8px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: transparent;
+    color: var(--text);
+    box-sizing: border-box;
+    min-width: 0;
+    font-family: inherit;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+.form-textarea { resize: vertical; min-height: 120px; }
+.form-actions { display:flex; gap:12px; align-items:center; justify-content:center; margin-top:18px; }
+.form-btn {
+    cursor: pointer;
+    padding: 10px 18px;
+    border-radius: 8px;
+    border: 2px solid var(--accent);
+    background: linear-gradient(90deg,var(--accent),var(--accent-secondary));
+    color: var(--background);
+    font-weight: 700;
+}
+.form-status { text-align:center; margin-top:12px; color:var(--text); opacity:0.95; font-size:0.95rem; display:none; }
+
+/* Lighter focus for accessibility */
+.form-control:focus {
+    outline: none;
+    border-color: rgba(255,255,255,0.18);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08), 0 0 0 4px rgba(99,102,241,0.06);
+}
+
+/* Ensure labels inside grid can shrink to avoid overlap */
+.form-row .form-label { min-width: 0; }
+
 .fade-in {
     opacity: 0;
     transform: translateY(15px);
     animation: fadeInUp 0.8s ease forwards;
+}
+
+@media (max-width: 700px) {
+    .form-row { grid-template-columns: 1fr; }
+    .contact-form { padding: 18px; }
+    /* reduce the top offset on small screens to keep the form visible */
+    .contact-main { min-height: calc(100vh - 64px); padding: 28px 18px; }
 }
 
 @keyframes fadeInUp {
@@ -272,66 +403,131 @@ footer a:hover {
     }
 }
 
+@keyframes gradientShimmer {
+    0% {
+        background-position: 200% center;
+    }
+    50% {
+        background-position: 0% center;
+    }
+    100% {
+        background-position: -200% center;
+    }
+}
+
+@keyframes glowPulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(0, 217, 255, 0.4), inset 0 0 0 2px var(--primary);
+    }
+    50% {
+        box-shadow: 0 0 0 10px rgba(0, 217, 255, 0), inset 0 0 0 2px var(--primary);
+    }
+}
+
+@keyframes gradientShimmer {
+    0% {
+        background-position: 200% center;
+    }
+    50% {
+        background-position: 0% center;
+    }
+    100% {
+        background-position: -200% center;
+    }
+}
+
+@keyframes glowPulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(0, 217, 255, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 0 8px rgba(0, 217, 255, 0);
+    }
+}
 
 
-/* --- Projects Page --- */
+
 .projects-page .projects-grid {
     display: flex;
     flex-direction: column;
-    gap: 60px;
-    margin-top: 40px;
-    /* fill the main content width so cards align with other page content */
+    gap: clamp(20px, 4vh, 60px);
+    margin-top: clamp(20px, 3vh, 40px);
     width: 100%;
-    max-width: none;
-    /* slightly less left padding and more right padding to shift cards visually */
-    padding-left: 12px;
-    padding-right: 48px;
     box-sizing: border-box;
-    align-items: stretch;
-}
-.projects-page .projects-grid {
+    padding: 0;
+    align-items: center;
     padding-bottom: 60px;
 }
 
 .projects-page .project-card {
     width: 100%;
     display: flex;
-    align-items: center;
-    justify-content: flex-start; /* keep items aligned to left so spacing is even inside centered container */
-    text-align: left; /* ensure card content (titles, paragraphs, lists) is left-aligned */
-    gap: 50px;
-    padding: 40px;
-    border: 2px solid var(--accent);
+    flex-direction: column;
+    gap: 16px;
+    padding: clamp(12px, 1.5vw, 28px);
+    border: 1px solid rgba(0,0,0,0.06);
     border-radius: 10px;
     background-color: var(--secondary);
-    max-width: 1100px; /* limit visual width */
-    margin-left: 0; /* align cards to left within the grid */
-    margin-right: auto;
+    max-width: 1100px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    align-items: stretch;
+    transition: transform 0.32s cubic-bezier(.2,.9,.2,1), box-shadow 0.32s ease, border-color 0.32s ease;
+    box-shadow: 0 6px 20px rgba(43,31,25,0.03);
 }
 
-.projects-page .project-card:nth-child(even) {
-    flex-direction: row-reverse;
+.projects-page .project-card:hover,
+.projects-page .project-card:focus,
+.projects-page .project-card:focus-within {
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 0 18px 40px rgba(43,31,25,0.12);
+    border-color: rgba(0,0,0,0.08);
 }
 
-.projects-page .project-card:first-child {
-    flex-direction: row;
+@media (min-width: 900px) {
+    .projects-page .project-card {
+        flex-direction: row;
+        align-items: center;
+        gap: 40px;
+    }
+    .projects-page .project-card:nth-child(even) {
+        flex-direction: row-reverse;
+    }
+    .projects-page .project-card:first-child {
+        flex-direction: row;
+    }
+    .projects-page .project-card img {
+        width: 50%;
+        flex: 0 0 50%;
+        height: auto;
+        object-fit: cover;
+        aspect-ratio: 16 / 9;
+        max-height: 420px;
+    }
+    .projects-page .project-text {
+        flex: 0 0 50%;
+        padding-right: 16px;
+    }
 }
 
 .projects-page .project-card img {
-    width: 45%;
-    height: 260px;
+    width: 100%;
+    height: auto;
     object-fit: cover;
     border-radius: 8px;
     border: 2px solid var(--accent);
+    aspect-ratio: 16 / 9;
+    max-height: 420px;
 }
 
 .projects-page .project-text {
-    width: 50%;
-    font-size: 1.15rem;
+    flex: 1 1 320px;
+    font-size: clamp(0.95rem, 0.9rem + 0.6vw, 1.15rem);
     line-height: 1.5;
     color: var(--text);
     text-align: left;
     padding-right: 8px;
+    box-sizing: border-box;
 }
 
 .projects-page .project-text h3 {
@@ -347,7 +543,7 @@ footer a:hover {
 
 .projects-page .project-text ul {
     margin-top: 12px;
-    padding-left: 1.25rem; /* slightly larger left padding to align markers visually */
+    padding-left: 1.25rem;
     list-style: disc;
     list-style-position: outside;
 }
@@ -362,8 +558,45 @@ footer a:hover {
     font-size: 1rem;
 }
 
+.projects-table-wrap {
+    width: 100%;
+    margin-top: 40px;
+    box-sizing: border-box;
+    padding: 0 20px;
+}
+.projects-table-container {
+    width: min(98%, 1200px);
+    margin: 0 auto 48px;
+}
+.projects-table-container h3 {
+    margin: 8px 0 14px;
+    text-align: left;
+    color: var(--primary);
+    font-size: 1.15rem;
+}
+.projects-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: transparent;
+}
+.projects-table thead th {
+    text-align: left;
+    padding: 12px 16px;
+    background-color: rgba(255,255,255,0.03);
+    color: var(--text);
+    border-bottom: 2px solid var(--accent);
+}
+.projects-table tbody td {
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    vertical-align: top;
+    color: var(--text);
+}
+.projects-table tbody tr:nth-child(even) { background-color: rgba(255,255,255,0.01); }
+.projects-table td, .projects-table th { font-size: 1rem; }
 
-/* -------- RESUME PAGE -------- */
+.projects-table-wrap { overflow-x: auto; }
+.projects-table { min-width: 900px; }
 
 .resume-page h2 {
     text-align: center;
@@ -392,7 +625,65 @@ footer a:hover {
     padding-left: 20px;
 }
 
-/* Experience formatting for resume page */
+.certifications ul li {
+    transition: color 0.18s ease;
+}
+.certifications ul li:hover,
+.certifications ul li:focus-within {
+    color: var(--accent);
+}
+.certifications ul li a {
+    color: inherit;
+    text-decoration: none;
+}
+.certifications ul li a:hover,
+.certifications ul li a:focus {
+    color: var(--accent);
+}
+
+/* Contact Info: only change anchor text on hover (not whole paragraph) */
+.contact-info {
+    transition: color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+    /* make the contact-info section match project-card sizing and visual weight */
+    width: 100%;
+    max-width: 1100px;
+    margin: 18px auto;
+    padding: clamp(12px, 1.5vw, 28px);
+    border-radius: 8px;
+    border: 2px solid var(--accent);
+    background-color: var(--secondary);
+    box-shadow: 0 6px 20px rgba(43,31,25,0.03);
+    box-sizing: border-box;
+}
+.contact-info, .contact-info p, .contact-info li, .contact-info a {
+    font-family: inherit;
+}
+.contact-info a,
+.contact-info a:visited {
+    color: var(--text);
+    transition: color 0.18s ease, font-family 0.18s ease, font-weight 0.18s ease;
+}
+.contact-info a:hover,
+.contact-info a:focus {
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+/* Visual outline + lift for contact card on hover/focus */
+.contact-info:hover,
+.contact-info:focus-within {
+    /* keep the purple border visible; only apply lift and shadow */
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 18px 40px rgba(43,31,25,0.12);
+}
+
+/* project card description helper (remove inline styles) */
+.projects-grid .project-card .card-desc {
+    padding: 0 16px 18px;
+    color: var(--text);
+}
+
 .experience-item {
     display: flex;
     justify-content: space-between;
